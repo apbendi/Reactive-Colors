@@ -8,13 +8,24 @@
 
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
-#import "ViewController.h"
+#import "RICPickerViewController.h"
+#import "RICPickerViewModel.h"
 
-@interface ViewController ()
-
+@interface RICPickerViewController ()
+@property (nonatomic) RICPickerViewModel *viewModel;
 @end
 
-@implementation ViewController
+@implementation RICPickerViewController
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self == nil) return nil;
+
+    self.viewModel = [[RICPickerViewModel alloc] init];
+
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -36,14 +47,14 @@
         return @(slider.value);
       }] startWith:@(self.blueSlider.value)];
 
-    RACSignal *colorSignal = [RACSignal
-                              combineLatest:(@[redValueSignal, greenValueSignal, blueValueSignal])
-                              reduce:^(NSNumber *redValue, NSNumber *greenValue, NSNumber *blueValue){
 
-                                  return [UIColor colorWithRed:[redValue floatValue] green:[greenValue floatValue] blue:[blueValue floatValue] alpha:1.0f];
-                              }];
+    RAC(self.viewModel, red) = redValueSignal;
+    RAC(self.viewModel, green) = greenValueSignal;
+    RAC(self.viewModel, blue) = blueValueSignal;
 
-    RAC(self.colorView, backgroundColor) = colorSignal;
+    [RACObserve(self.viewModel, color) subscribeNext:^(UIColor *color) {
+        self.colorView.backgroundColor = color;
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
