@@ -16,33 +16,46 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="jki-he-gtG">
-                                <rect key="frame" x="18" y="285" width="564" height="31"/>
-                            </slider>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="qFc-Kg-Gfh">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="qFc-Kg-Gfh" userLabel="Red Slider">
                                 <rect key="frame" x="18" y="247" width="564" height="31"/>
                             </slider>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="x6p-p2-qte">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="jki-he-gtG" userLabel="Green Slider">
+                                <rect key="frame" x="18" y="285" width="564" height="31"/>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="x6p-p2-qte" userLabel="Blue Slider">
                                 <rect key="frame" x="18" y="323" width="564" height="31"/>
                             </slider>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Np-dq-X5K">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Np-dq-X5K" userLabel="Color View">
                                 <rect key="frame" x="20" y="28" width="560" height="211"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" maximumValue="1" stepValue="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="XH7-to-EAc" userLabel="Alpha Stepper">
+                                <rect key="frame" x="20" y="361" width="94" height="29"/>
+                            </stepper>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BPF-6n-tCu">
+                                <rect key="frame" x="122" y="365" width="46" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="BPF-6n-tCu" firstAttribute="centerY" secondItem="XH7-to-EAc" secondAttribute="centerY" id="1oK-FX-cUU"/>
                             <constraint firstItem="jki-he-gtG" firstAttribute="leading" secondItem="x6p-p2-qte" secondAttribute="leading" id="4gY-dD-NEX"/>
                             <constraint firstAttribute="trailing" secondItem="1Np-dq-X5K" secondAttribute="trailing" constant="20" symbolic="YES" id="6mK-Ep-clp"/>
                             <constraint firstItem="1Np-dq-X5K" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" symbolic="YES" id="74e-Wm-BVS"/>
                             <constraint firstItem="qFc-Kg-Gfh" firstAttribute="leading" secondItem="jki-he-gtG" secondAttribute="leading" id="B1p-OI-YYd"/>
+                            <constraint firstItem="XH7-to-EAc" firstAttribute="top" secondItem="x6p-p2-qte" secondAttribute="bottom" constant="8" symbolic="YES" id="E6T-NZ-i7h"/>
                             <constraint firstAttribute="trailing" secondItem="jki-he-gtG" secondAttribute="trailing" constant="20" symbolic="YES" id="GEq-V4-bld"/>
                             <constraint firstItem="jki-he-gtG" firstAttribute="top" secondItem="qFc-Kg-Gfh" secondAttribute="bottom" constant="8" symbolic="YES" id="JdD-Do-LFe"/>
                             <constraint firstAttribute="centerY" secondItem="jki-he-gtG" secondAttribute="centerY" id="SCQ-F6-GJL"/>
                             <constraint firstItem="qFc-Kg-Gfh" firstAttribute="trailing" secondItem="jki-he-gtG" secondAttribute="trailing" id="T6X-2v-jc0"/>
+                            <constraint firstItem="XH7-to-EAc" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" symbolic="YES" id="VQ6-cz-ujD"/>
                             <constraint firstItem="jki-he-gtG" firstAttribute="trailing" secondItem="x6p-p2-qte" secondAttribute="trailing" id="W0i-0f-WMf"/>
                             <constraint firstItem="x6p-p2-qte" firstAttribute="top" secondItem="jki-he-gtG" secondAttribute="bottom" constant="8" symbolic="YES" id="ac8-fe-uEU"/>
                             <constraint firstItem="jki-he-gtG" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" symbolic="YES" id="iDh-Hl-1vd"/>
+                            <constraint firstItem="BPF-6n-tCu" firstAttribute="leading" secondItem="XH7-to-EAc" secondAttribute="trailing" constant="8" symbolic="YES" id="rIF-ab-TGC"/>
                             <constraint firstItem="jki-he-gtG" firstAttribute="width" secondItem="x6p-p2-qte" secondAttribute="width" id="rh3-F5-T3a"/>
                             <constraint firstItem="1Np-dq-X5K" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" symbolic="YES" id="stb-P9-XgT"/>
                             <constraint firstItem="qFc-Kg-Gfh" firstAttribute="top" secondItem="1Np-dq-X5K" secondAttribute="bottom" constant="8" symbolic="YES" id="xWZ-ZY-kCV"/>
@@ -54,6 +67,8 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="alphaLabel" destination="BPF-6n-tCu" id="Bxo-4f-Tc9"/>
+                        <outlet property="alphaStepper" destination="XH7-to-EAc" id="tTd-Na-71Y"/>
                         <outlet property="blueSlider" destination="x6p-p2-qte" id="GiI-1O-OEK"/>
                         <outlet property="colorView" destination="1Np-dq-X5K" id="q09-Nt-kFa"/>
                         <outlet property="greenSlider" destination="jki-he-gtG" id="Wgz-vB-NBP"/>

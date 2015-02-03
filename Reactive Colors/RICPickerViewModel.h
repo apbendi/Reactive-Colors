@@ -11,6 +11,7 @@
 @interface RICPickerViewModel : NSObject
 
 @property (nonatomic, readonly) UIColor *color;
+@property (nonatomic, readonly, copy) NSString *alphaPercent;
 
 @property (nonatomic) float red;
 @property (nonatomic) float blue;

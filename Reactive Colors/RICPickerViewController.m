@@ -29,37 +29,34 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
 
-    RACSignal *greenSliderChangedSignal = [self.greenSlider rac_signalForControlEvents:UIControlEventValueChanged];
-
-    RACSignal *greenValueSignal = [[greenSliderChangedSignal map:^id(UISlider *sender) {
-        return [NSNumber numberWithFloat:sender.value];
-    }] startWith:@(self.greenSlider.value)];
-
-    RACSignal *redValueSignal = [[[self.redSlider rac_signalForControlEvents:UIControlEventValueChanged]
-                                 map:^id(UISlider *slider) {
-        return @(slider.value);
-    }] startWith:@(self.redSlider.value)];
-
-    RACSignal *blueValueSignal = [[[self.blueSlider rac_signalForControlEvents:UIControlEventValueChanged]
-      map:^NSNumber *(UISlider *slider) {
-        return @(slider.value);
-      }] startWith:@(self.blueSlider.value)];
+    RAC(self.viewModel, red) = [RICPickerViewController signalForValueOnChangeOfSlider:self.redSlider];
+    RAC(self.viewModel, green) = [RICPickerViewController signalForValueOnChangeOfSlider:self.greenSlider];
+    RAC(self.viewModel, blue) = [RICPickerViewController signalForValueOnChangeOfSlider:self.blueSlider];
+    RAC(self.viewModel, alpha) = [[[self.alphaStepper
+                                    rac_signalForControlEvents:UIControlEventValueChanged]
+                                   map:^NSNumber *(UIStepper *stepper) {
+                                      return @(stepper.value);
+                                  }]
+                                  startWith:@(self.alphaStepper.value)];
 
 
-    RAC(self.viewModel, red) = redValueSignal;
-    RAC(self.viewModel, green) = greenValueSignal;
-    RAC(self.viewModel, blue) = blueValueSignal;
+    RAC(self.colorView, backgroundColor) = RACObserve(self.viewModel, color);
+    RAC(self.alphaLabel, text) = RACObserve(self.viewModel, alphaPercent);
 
-    [RACObserve(self.viewModel, color) subscribeNext:^(UIColor *color) {
-        self.colorView.backgroundColor = color;
-    }];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
++ (RACSignal *)signalForValueOnChangeOfSlider:(UISlider *)slider
+{
+    NSNumber *(^mapBlock)(UISlider *slider) = ^NSNumber *(UISlider *slider) {
+        return @(slider.value);
+    };
+   
+
+    return [[[slider
+              rac_signalForControlEvents:UIControlEventValueChanged]
+             map:mapBlock]
+            startWith:@(slider.value)];
 }
 
 @end

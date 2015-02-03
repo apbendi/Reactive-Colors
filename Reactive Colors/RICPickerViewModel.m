@@ -30,14 +30,17 @@
     RAC(self.colorModel, blue) = RACObserve(self, blue);
     RAC(self.colorModel, alpha) = RACObserve(self, alpha);
 
-    self.alpha = 1.0f;
-
     RAC(self, color) =
     [RACSignal
      combineLatest:@[RACObserve(self.colorModel, red), RACObserve(self.colorModel, green), RACObserve(self.colorModel, blue), RACObserve(self.colorModel, alpha)]
      reduce:^UIColor *(NSNumber *red, NSNumber *green, NSNumber *blue, NSNumber *alpha){
          NSLog(@"Hello from Combined");
          return [UIColor colorWithRed:[red floatValue] green:[green floatValue] blue:[blue floatValue] alpha:[alpha floatValue]];
+    }];
+
+    RAC(self, alphaPercent) = [RACObserve(self.colorModel, alpha) map:^NSString *(NSNumber *alpha) {
+        int percent = [alpha floatValue] * 100;
+        return [NSString stringWithFormat:@"%i%%", percent, nil];
     }];
 
     return self;
